@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Cuestionario de Motivación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resultados del Cuestionario de Motivación</h1>
+        <p>Gracias por completar el cuestionario. Aquí están los resultados generales:</p>
+
+        <!-- Tabla de resultados -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Factor</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apoyo Social</td>
+                    <td>{{ prom_apoyo_social }}</td>
+                </tr>
+                <tr>
+                    <td>Motivación por Resultados</td>
+                    <td>{{ prom_motivacion_resultados }}</td>
+                </tr>
+                <tr>
+                    <td>Variedad en Rutinas</td>
+                    <td>{{ prom_variedad_rutinas }}</td>
+                </tr>
+                <tr>
+                    <td>Influencia de la Música</td>
+                    <td>{{ prom_influencia_musica }}</td>
+                </tr>
+                <tr>
+                    <td>Metas Claras</td>
+                    <td>{{ prom_metas_claras }}</td>
+                </tr>
+                <tr>
+                    <td>Retroalimentación Positiva</td>
+                    <td>{{ prom_retroalimentacion }}</td>
+                </tr>
+                <tr>
+                    <td>Ambiente del Gimnasio</td>
+                    <td>{{ prom_ambiente_gimnasio }}</td>
+                </tr>
+                <tr>
+                    <td>Frecuencia de Motivación</td>
+                    <td>{{ prom_frecuencia_motivacion }}</td>
+                </tr>
+                <tr>
+                    <td>Progreso Físico</td>
+                    <td>{{ prom_progreso_fisico }}</td>
+                </tr>
+                <tr>
+                    <td>Comunidad del Gimnasio</td>
+                    <td>{{ prom_comunidad_gimnasio }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Total de respuestas: {{ total_respuestas }}</p>
+
+        <!-- Gráfico -->
+        <canvas id="motivationChart" width="400" height="200"></canvas>
+
+        <a href="/" class="btn btn-primary btn-block">Volver al Cuestionario</a>
+    </div>
+
+    <script>
+        // Datos para el gráfico
+        const ctx = document.getElementById('motivationChart').getContext('2d');
+        const motivationChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico
+            data: {
+                labels: [
+                    'Apoyo Social',
+                    'Motivación por Resultados',
+                    'Variedad en Rutinas',
+                    'Influencia de la Música',
+                    'Metas Claras',
+                    'Retroalimentación Positiva',
+                    'Ambiente del Gimnasio',
+                    'Frecuencia de Motivación',
+                    'Progreso Físico',
+                    'Comunidad del Gimnasio'
+                ],
+                datasets: [{
+                    label: 'Promedio de Respuestas',
+                    data: [
+                        {{ prom_apoyo_social }},
+                        {{ prom_m otivacion_resultados }},
+                        {{ prom_variedad_rutinas }},
+                        {{ prom_influencia_musica }},
+                        {{ prom_metas_claras }},
+                        {{ prom_retroalimentacion }},
+                        {{ prom_ambiente_gimnasio }},
+                        {{ prom_frecuencia_motivacion }},
+                        {{ prom_progreso_fisico }},
+                        {{ prom_comunidad_gimnasio }}
+                    ],
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
